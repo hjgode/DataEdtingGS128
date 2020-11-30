@@ -1,5 +1,6 @@
 package hsm.dataeditgs128;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -17,9 +18,34 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setAction("com.honeywell.decode.intent.action.EDIT_DATA");// ("hsm.dataeditgs128.DataEditing");
         intent.putExtra("data", "ScanData123");
-        sendBroadcast(intent);
+        intent.putExtra("aimId", "]C1");
+        intent.putExtra("version",1);
+        //sendBroadcast(intent);
+        sendOrderedBroadcast(intent,
+                null,
+                new NotificationResultReceiver(),
+                null,
+                Activity.RESULT_OK,
+                null,
+                null);
     }
 
+    public class NotificationResultReceiver extends BroadcastReceiver {
+
+        @Override public void onReceive(Context context, Intent i) {
+            final int code = getResultCode();
+            Bundle bundle=i.getExtras();
+            String data=bundle.getString("data");
+            Log.d(Consts.TAG, "NotificationResultReceiver: code="+code);
+            if (code == Activity.RESULT_OK) {
+                // app is not active
+                // generate System Notification
+            } else {
+                // LocalBroadcastReceiver registered.
+                // app is active
+            }
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

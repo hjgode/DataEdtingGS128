@@ -20,16 +20,8 @@ import static android.content.Context.MODE_PRIVATE;
  */
 public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128.Common
 {
-    private final String TAG = "DataEditGS128: ";
 
-    // Result success, continue further processing, wedge
-    private static final int DATA_EDIT_RESULT_SUCCESS = 0;
-    // Result continue, continue further processing, wedge
-    private static final int DATA_EDIT_RESULT_CONTINUE = 1;
-    // Result handled, stop further processing, no wedge
-    private static final int DATA_EDIT_RESULT_HANDLED = 2;
-    // Result error, stop further processing and bad read notification, no wedge
-    private static final int DATA_EDIT_RESULT_ERROR = 3;
+
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -37,41 +29,39 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
         String ScanResult = intent.getStringExtra("data");//Read the scan result from the Intent
         int version = intent.getIntExtra("version", 0);
         String sAimId;
+        String _data="";
         if(version==0)
             sAimId="not supported";
         else
             sAimId = intent.getStringExtra("aimId");
 
-        Log.d(TAG, "data="+ScanResult+", aimId=" + sAimId);
+        Log.d(Consts.TAG, "data="+ScanResult+", aimId=" + sAimId);
 
         Bundle bundle = new Bundle();
         //load
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        Boolean currentMode = prefs.getBoolean(PREF_KEY_ENABLE, true);
+        Boolean isEnabled = prefs.getBoolean(PREF_KEY_ENABLE, true);
+        _data=ScanResult;
 
-        if(!currentMode){
+        if(!isEnabled){
             bundle.putString("data", ScanResult);
-            Log.d(TAG, "DataEditHex disabled, returning unchanged ScanResult " + ScanResult);
+            Log.d(Consts.TAG, "DataEditHex disabled, returning unchanged ScanResult " + ScanResult);
         }
         else {
             //---------------------------------------------
             //Modify the scan result as needed.
             //---------------------------------------------
-
-            //Return the Modified scan result string
-            //convert data to hex string
-            byte[] digits = ScanResult.getBytes();
-
-            //see http://stackoverflow.com/questions/19450452/how-to-convert-byte-array-to-hex-format-in-java
-            Formatter formatter = new Formatter();
-            for (byte b : digits) {
-                formatter.format("%02x", b);
+            if(sAimId.equals("]C1")){
+                _data="]C1"+ScanResult;
+            }else{
+                Log.d(Consts.TAG, "not aimId==]C1, no change");
             }
-            String hex = formatter.toString();
 
             //return edited data
-            bundle.putString("data", hex);
+            bundle.putString("data", _data);
 
+            //show a Toast message?
+/*
             if (isAppForground(context)) {
                 // App is in Foreground
                 Toast.makeText(context, "Intent Detected: " + ScanResult + " / " + hex, Toast.LENGTH_LONG).show();
@@ -79,19 +69,21 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
                 // App is in Background
                 ;
             }
+*/
 
-            Log.d("DataEditGS128: ", "Intent Detected: " + ScanResult + " / " + hex);
+            Log.d("DataEditGS128: ", "Intent Detected: in/out = " + ScanResult + " / " + _data);
 
             setResultExtras(bundle);
         }//if !currentMode
-        int resultCode = DATA_EDIT_RESULT_SUCCESS;
+        int resultCode = Consts.DATA_EDIT_RESULT_SUCCESS;
         final PendingResult result = goAsync();
         result.setResultExtras(bundle);
         if(isOrderedBroadcast()){
             result.setResultCode(resultCode);
-            Log.d(TAG, "isOrderedBroadcast: TRUE");
+            Log.d(Consts.TAG, "isOrderedBroadcast: TRUE");
         }else{
-            Log.d(TAG, "isOrderedBroadcast: FALSE");
+            result.setResultCode(resultCode);
+            Log.d(Consts.TAG, "isOrderedBroadcast: FALSE");
         }
         result.finish();
     }

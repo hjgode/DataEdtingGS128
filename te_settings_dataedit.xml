@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigDoc name="te_settings">
+<Section name="General">
+<Key name="Data Editor Plugin">hsm.dataeditgs128/.DataEditing</Key>
+</Section>
+</ConfigDoc>
