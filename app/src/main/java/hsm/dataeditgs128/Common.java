@@ -7,6 +7,7 @@ package hsm.dataeditgs128;
 public interface Common {
         String PREF_NAME = "deplugin_hsm_dataedithex";
         String PREF_KEY_ENABLE = "enabled";
+        String PREF_KEY_GS1REPLACE = "#";
 /*
         String PREF_KEY_BARCODE_2 = "barcode_2";
 

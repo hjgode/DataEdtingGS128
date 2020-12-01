@@ -13,5 +13,10 @@
             android:summary="Enable/Disable plugin"
             android:title="Insert GS1-128 AimId"
             android:defaultValue="true"/>
+        <EditTextPreference
+            android:key="gs1replace"
+            android:summary="Replace GS1 symbol by this:"
+            android:title="GS1 replacement"
+            android:defaultValue="#"/>
     </PreferenceCategory>
 </PreferenceScreen>

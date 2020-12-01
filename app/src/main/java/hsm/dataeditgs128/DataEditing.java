@@ -41,6 +41,7 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
         //load
         SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         Boolean isEnabled = prefs.getBoolean(PREF_KEY_ENABLE, true);
+        String gs1replace = prefs.getString(PREF_KEY_GS1REPLACE, "#");
         _data=ScanResult;
 
         if(!isEnabled){
@@ -52,7 +53,8 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
             //Modify the scan result as needed.
             //---------------------------------------------
             if(sAimId.equals("]C1")){
-                _data="]C1"+ScanResult;
+                String temp=ScanResult.replace("\u001D", gs1replace);
+                _data="]C1"+temp;//ScanResult;
             }else{
                 Log.d(Consts.TAG, "not aimId==]C1, no change");
             }
