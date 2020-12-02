@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?>
+<ConfigDoc name="te_settings">
+   <Section name="General">
+      <Key name="Data Editor Plugin">hsm.dataeditgs128/.DataEditing</Key>
+   </Section>
+   <SettingsPackage>pkg/apps/TE_1.32.00.0107/</SettingsPackage>
+   <HHPReserved name="HHPReserved">
+      <Section>
+         <Key name="EXMVersion">1</Key>
+      </Section>
+   </HHPReserved>
+</ConfigDoc>

@@ -1,0 +1,16 @@
+<ConfigDoc name='Provisioner'>
+   <SettingsPackage>pkg/HON660/[87-88].00.03/</SettingsPackage>
+   <Section name='CommandTask'>
+      <Key name='Action'>ClearAllTasks</Key>
+   </Section>
+   <Section name='Tasks'>
+      <Section name='Task'>
+         <Key name='Action'>InstallApk</Key>
+         <Key name='Source'>https://https://github.com/hjgode/DataEdtingGS128/raw/master/app/release/DataEdtingGS128.apk</Key>
+         <Key name='Launch'>DataEdtingGS128.apk download launched</Key>
+         <Key name='ProgressMessage'>DataEdtingGS128.apk active</Key>
+         <Key name='ErrorMessage'>Error installing DataEdtingGS128.apk</Key>
+         <Key name='CompleteMessage'>Download and install completed for DataEdtingGS128.apk</Key>
+      </Section>
+   </Section>
+</ConfigDoc>

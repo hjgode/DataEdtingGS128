@@ -1,0 +1,18 @@
+<?xml version="1.0" standalone="yes"?>
+<ConfigDoc name="DataCollectionService" ProfileNameDialog="true">
+   <Section name="wedge">
+      <Section name="profiles">
+         <Section name="dcs.scanner.imager">
+            <Section name="DEFAULT" ProfileNameDialog="true">
+               <Key name="DPR_EDIT_DATA_PLUGIN" path="/wedge/profiles/dcs.scanner.imager/DEFAULT/DATA_PROCESSING_SETTINGS/EDIT_DATA_PLUGIN">hsm.dataeditgs128/.DataEditing</Key>
+            </Section>
+         </Section>
+      </Section>
+   </Section>
+   <SettingsPackage>pkg/HON660/[87-88].00.09/</SettingsPackage>
+   <HHPReserved name="HHPReserved">
+      <Section>
+         <Key name="EXMVersion">1</Key>
+      </Section>
+   </HHPReserved>
+</ConfigDoc>
