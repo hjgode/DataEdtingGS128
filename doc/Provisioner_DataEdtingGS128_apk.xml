@@ -6,7 +6,7 @@
    <Section name='Tasks'>
       <Section name='Task'>
          <Key name='Action'>InstallApk</Key>
-         <Key name='Source'>https://https://github.com/hjgode/DataEdtingGS128/raw/master/app/release/DataEdtingGS128.apk</Key>
+         <Key name='Source'>https://github.com/hjgode/DataEdtingGS128/raw/master/app/release/DataEdtingGS128.apk</Key>
          <Key name='Launch'>DataEdtingGS128.apk download launched</Key>
          <Key name='ProgressMessage'>DataEdtingGS128.apk active</Key>
          <Key name='ErrorMessage'>Error installing DataEdtingGS128.apk</Key>
