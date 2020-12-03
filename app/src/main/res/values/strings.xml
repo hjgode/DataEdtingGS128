@@ -1,10 +1,10 @@
 <resources>
     <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">My Application</string>
+    <string name="title_activity_main">DataEditingGS128 Plugin</string>
     <string name="app_name">DataEditGS128</string>
     <string name="action_settings">action settings</string>
-    <string name="subTitle">ScanWedge DataEditing</string>
-    <string name="Title">Example of TotalFreedom Plugin</string>
+    <string name="subTitle">DataEditingGS128 Plugin</string>
+    <string name="Title">DataEditing Plugin</string>
     <string name="btnText">Test Intent</string>
     <string name="help_text">Clicking [Test Intent] will invoke the intent with \"ScanData123\"</string>
 

@@ -18,5 +18,10 @@
             android:summary="Replace GS1 symbol by this:"
             android:title="GS1 replacement"
             android:defaultValue="#"/>
+        <CheckBoxPreference
+            android:key="enable_90only"
+            android:summary="Prefix AimID only for (90)"
+            android:title="Detect AI=(90)"
+            android:defaultValue="true"/>
     </PreferenceCategory>
 </PreferenceScreen>

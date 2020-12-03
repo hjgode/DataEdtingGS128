@@ -27,4 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
                 .replace(android.R.id.content, new hsm.dataeditgs128.SettingsFragment().newInstance())
                 .commit();
     }
+
+
 }

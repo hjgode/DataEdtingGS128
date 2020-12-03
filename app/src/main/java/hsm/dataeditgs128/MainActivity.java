@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,8 +14,17 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import static hsm.dataeditgs128.Common.PREF_KEY_ENABLE;
+import static hsm.dataeditgs128.Common.PREF_KEY_GS1REPLACE;
+import static hsm.dataeditgs128.Common.PREF_KEY_PROCESS90ONLY;
+import static hsm.dataeditgs128.Common.PREF_NAME;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView currentSettings;
+
     // broadcast a custom intent.
     public void broadcastIntent(View view){
         Intent intent = new Intent();
@@ -53,6 +65,15 @@ public class MainActivity extends AppCompatActivity {
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 
+        currentSettings=findViewById(R.id.currentSettings);
+
+        updateSettingsText(this);
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateSettingsText(this);
     }
 
     @Override
@@ -75,5 +96,25 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    void updateSettingsText(Context context){
+        SharedPreferences prefs = this.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        Boolean isEnabled = prefs.getBoolean(PREF_KEY_ENABLE, true);
+        String gs1replace = prefs.getString(PREF_KEY_GS1REPLACE, "#");
+        Boolean process90only=prefs.getBoolean(PREF_KEY_PROCESS90ONLY, true);
+        currentSettings.setText("Current setup:\n"+
+                "Plugin enabled=     "+isEnabled+"\n"+
+                "Replace GS1=        "+gs1replace+"\n"+
+                "Only for AI is (90)="+process90only);
+
+        try {
+            PackageInfo pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+            String version = pInfo.versionName;
+            int verCode=pInfo.versionCode;
+            currentSettings.append("\nversion: "+version+" ("+verCode+")");
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
