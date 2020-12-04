@@ -31,7 +31,10 @@ The source xml files are also available in the doc directory:
 ### History
 version 1.3 (3)
 
-* Will change all GS1-128 codes and remove the leading ]C1 (inserted by scan engine as default for the EAN 128 barcode starting with a GS symbol, the identifier for GS1-128)
+updated on 4.12.2020
+
+* Will change all GS1-128 codes and remove the leading ]C1 (inserted by scan engine as default for the EAN 128 barcode starting with a GS symbol, the identifier for GS1-128).
+Except the GS1-128 barcode starts with 90. Then the ]C1 is inserted at front and all GS symbols are replaced by #.
 
 * Replaces GS symbol inside GS1-128 if first AI is 90 (barcode data starts with ]C190)
 

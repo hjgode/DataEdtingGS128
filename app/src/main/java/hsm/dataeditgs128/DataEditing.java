@@ -55,7 +55,7 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
             //Modify the scan result as needed.
             //---------------------------------------------
             if(sAimId.equals("]C1")){
-                if(process90only && ScanResult.startsWith("]C190")) {
+                if(process90only && ScanResult.startsWith("90")) {
                     Log.d(Consts.TAG, "aimId=]C1 and starts with 90");
                     String temp = ScanResult.replace("\u001D", gs1replace);
                     _data = "]C1" + temp;//ScanResult;
