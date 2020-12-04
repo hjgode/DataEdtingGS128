@@ -61,7 +61,10 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
                     _data = "]C1" + temp;//ScanResult;
                 }else{
                     Log.d(Consts.TAG, "aimId is ]C1 and does not start with 90. Removing GS1 ]C1 id");
-                    _data=ScanResult.substring(3);
+                    if(ScanResult.startsWith("]C1")) {
+                        //remove the AimID from data
+                        _data = ScanResult.substring(3);
+                    }
                 }
             }else{
                 Log.d(Consts.TAG, "not aimId==]C1, no change");

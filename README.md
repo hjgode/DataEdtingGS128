@@ -29,6 +29,16 @@ The source xml files are also available in the doc directory:
 [Download Release apk](https://github.com/hjgode/DataEdtingGS128/raw/master/app/release/DataEdtingGS128.apk)
 
 ### History
+version 1.4 (4)
+
+Corrected code. The ]C1 is not part of barcode data and so the logic has to be changed:
+
+* If a aimID ]C1 is set and barcode starts with 90: insert the aimId in front and replace all GS symbols by the # symbol.
+
+* If aimId is ]C1 and barcode does not start with 90, transmit data as is but remove any ]C1 in front, if data starts with that.
+
+* If aimId is not ]C1, transmit data as is.
+
 version 1.3 (3)
 
 updated on 4.12.2020
