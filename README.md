@@ -29,6 +29,14 @@ The source xml files are also available in the doc directory:
 [Download Release apk](https://github.com/hjgode/DataEdtingGS128/raw/master/app/release/DataEdtingGS128.apk)
 
 ### History
+version 1.5 (5)
+
+* New code inserts ]C1 for every GS1-128 barcode. Simplified logic, no more AI 90 special handling.
+
+* If GS replacement char is empty, it will not be replaced.
+
+* Replacement is done for every GS1-128 barcode.
+
 version 1.4 (4)
 
 Corrected code. The ]C1 is not part of barcode data and so the logic has to be changed:

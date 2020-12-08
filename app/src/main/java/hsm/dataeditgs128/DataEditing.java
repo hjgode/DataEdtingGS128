@@ -44,9 +44,10 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
         String gs1replace = prefs.getString(PREF_KEY_GS1REPLACE, "#");
         Boolean process90only=prefs.getBoolean(PREF_KEY_PROCESS90ONLY, true);
 
+        //preset return data
         _data=ScanResult;
 
-        if(!isEnabled){
+        if(!isEnabled){ //Plugin An/Aus
             bundle.putString("data", ScanResult);
             Log.d(Consts.TAG, "DataEditHex disabled, returning unchanged ScanResult " + ScanResult);
         }
@@ -54,20 +55,20 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
             //---------------------------------------------
             //Modify the scan result as needed.
             //---------------------------------------------
-            if(sAimId.equals("]C1")){
-                if(process90only && ScanResult.startsWith("90")) {
-                    Log.d(Consts.TAG, "aimId=]C1 and starts with 90");
-                    String temp = ScanResult.replace("\u001D", gs1replace);
+            //check if this is a GS1-128
+            if (sAimId.equals("]C1")) {
+                if (gs1replace.length() > 0) { //GS Ersetzung aktiv?
+                    Log.d(Consts.TAG, "aimId=]C1 and starts with anything and GS replace is set");
+                    String temp = ScanResult.replace("\u001d", gs1replace);
                     _data = "]C1" + temp;//ScanResult;
-                }else{
-                    Log.d(Consts.TAG, "aimId is ]C1 and does not start with 90. Removing GS1 ]C1 id");
-                    if(ScanResult.startsWith("]C1")) {
-                        //remove the AimID from data
-                        _data = ScanResult.substring(3);
-                    }
+                } else {
+                    String temp = ScanResult;
+                    _data = "]C1" + temp;//ScanResult;
                 }
-            }else{
+            }
+            else{
                 Log.d(Consts.TAG, "not aimId==]C1, no change");
+                _data=ScanResult;
             }
 
             //return edited data

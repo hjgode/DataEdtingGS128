@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.TextView;
 
 import static hsm.dataeditgs128.Common.PREF_KEY_ENABLE;
@@ -68,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
         currentSettings=findViewById(R.id.currentSettings);
 
         updateSettingsText(this);
+        Button button2=findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent myIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                //myIntent.putExtra("key", value); //Optional parameters
+                MainActivity.this.startActivity(myIntent);
+            }
+        });
     }
 
     @Override

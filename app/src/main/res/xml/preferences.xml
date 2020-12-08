@@ -4,24 +4,25 @@
     android:layout_height="match_parent"
     >
     <PreferenceCategory
-        android:title="Scanner Operation"
+        android:title="GS1-128 Plugin Einstellungen"
         android:key="scanops_category"
         >
 
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="enable_plugin"
-            android:summary="Enable/Disable plugin"
-            android:title="Insert GS1-128 AimId"
-            android:defaultValue="true"/>
+            android:summary="Plugin An/Aus"
+            android:title="Präfix in GS1-128 einfügen" />
         <EditTextPreference
+            android:defaultValue="#"
             android:key="gs1replace"
-            android:summary="Replace GS1 symbol by this:"
-            android:title="GS1 replacement"
-            android:defaultValue="#"/>
+            android:summary="Verwende Zeichen statt GS"
+            android:title="Ersetze GS Symbol" />
         <CheckBoxPreference
+            android:enabled="false"
+            android:defaultValue="true"
             android:key="enable_90only"
-            android:summary="Prefix AimID only for (90)"
-            android:title="Detect AI=(90)"
-            android:defaultValue="true"/>
+            android:summary="Esetze GS nur, wenn AI=90"
+            android:title="GS Ersetzung nur für AI=(90)" />
     </PreferenceCategory>
 </PreferenceScreen>

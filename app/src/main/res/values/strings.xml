@@ -5,7 +5,7 @@
     <string name="action_settings">action settings</string>
     <string name="subTitle">DataEditingGS128 Plugin</string>
     <string name="Title">DataEditing Plugin</string>
-    <string name="btnText">Test Intent</string>
+    <string name="btnText">Settings</string>
     <string name="help_text">Clicking [Test Intent] will invoke the intent with \"ScanData123\"</string>
 
     <!-- TODO: Remove or change this placeholder text -->
