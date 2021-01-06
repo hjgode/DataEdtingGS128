@@ -5,10 +5,10 @@ package hsm.dataeditgs128;
  */
 
 public interface Common {
-        String PREF_NAME = "deplugin_hsm_dataedithex";
-        String PREF_KEY_ENABLE = "enabled";
-        String PREF_KEY_GS1REPLACE = "#";
-        String PREF_KEY_PROCESS90ONLY="process_90only";
+        String PREF_NAME = "hsm.dataeditgs128_preferences";// "deplugin_hsm_dataedithex";
+        String PREF_KEY_ENABLE = "PREF_KEY_ENABLE";
+        String PREF_KEY_GS1REPLACE = "PREF_KEY_GS1REPLACE";
+        String PREF_ENABLE_90_ONLY ="PREF_KEY_PROCESS90ONLY";
 /*
         String PREF_KEY_BARCODE_2 = "barcode_2";
 

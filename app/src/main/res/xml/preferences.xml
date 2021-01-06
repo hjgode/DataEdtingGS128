@@ -10,18 +10,18 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="enable_plugin"
+            android:key="PREF_KEY_ENABLE"
             android:summary="Plugin An/Aus"
             android:title="Präfix in GS1-128 einfügen" />
         <EditTextPreference
             android:defaultValue="#"
-            android:key="gs1replace"
+            android:key="PREF_KEY_GS1REPLACE"
             android:summary="Verwende Zeichen statt GS"
             android:title="Ersetze GS Symbol" />
         <CheckBoxPreference
             android:enabled="false"
             android:defaultValue="true"
-            android:key="enable_90only"
+            android:key="PREF_ENABLE_90_ONLY"
             android:summary="Esetze GS nur, wenn AI=90"
             android:title="GS Ersetzung nur für AI=(90)" />
     </PreferenceCategory>

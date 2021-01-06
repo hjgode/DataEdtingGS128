@@ -1,6 +1,7 @@
 package hsm.dataeditgs128;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
+import static android.content.Context.MODE_MULTI_PROCESS;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
@@ -37,23 +39,24 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Common
         Log.d(TAG, "SettingsFragment onCreatePreferences");
         setPreferencesFromResource(R.xml.preferences, rootKey);
 
-        mPreferences=this.getActivity().getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-/*
-        //load
-        SharedPreferences prefs = getActivity().getSharedPreferences(PREF_NAME, MODE_PRIVATE);
-        Boolean currentMode = prefs.getBoolean(PREF_KEY_ENABLE, true);
-*/
+        //mPreferences=this.getActivity().getSharedPreferences(PREF_NAME, Context.MODE_MULTI_PROCESS);
+        mPreferences= getPreferenceScreen().getSharedPreferences(); // this gives hsm.dataeditgs128_preferences.xml
+        //mPreferences=PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+        mPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onResume(){
         super.onResume();
+        Log.d(TAG, "SettingsFragment onResume");
         getPreferenceScreen().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onPause(){
         super.onPause();
+        Log.d(TAG, "SettingsFragment onPause");
         getPreferenceScreen().getSharedPreferences().unregisterOnSharedPreferenceChangeListener(this);
     }
 
@@ -64,6 +67,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Common
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Log.d(Consts.TAG, "onSharedPreferenceChanged: sharedPrefs=" + sharedPreferences + ", key="+key);
+        if(key.equals(PREF_KEY_ENABLE)){
+            boolean bEnabled=sharedPreferences.getBoolean(PREF_KEY_ENABLE, false);
+            Log.d(Consts.TAG, "PREF_KEY_ENABLE now="+bEnabled);
+            SharedPreferences.Editor editor=sharedPreferences.edit();
+            editor.putBoolean(PREF_KEY_ENABLE, bEnabled);
+            editor.commit();
+        }
 /*
         android.support.v7.preference.Preference pref = findPreference(key);
 

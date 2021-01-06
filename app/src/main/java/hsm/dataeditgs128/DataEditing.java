@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
-import java.util.Formatter;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -39,10 +37,10 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
 
         Bundle bundle = new Bundle();
         //load
-        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        SharedPreferences prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_MULTI_PROCESS);
         Boolean isEnabled = prefs.getBoolean(PREF_KEY_ENABLE, true);
         String gs1replace = prefs.getString(PREF_KEY_GS1REPLACE, "#");
-        Boolean process90only=prefs.getBoolean(PREF_KEY_PROCESS90ONLY, true);
+        Boolean process90only=prefs.getBoolean(PREF_ENABLE_90_ONLY, true);
 
         //test if this is a QR Code to Toggle enabled /off/on
         if(sAimId.equals("]Q1")){

@@ -9,7 +9,6 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import static hsm.dataeditgs128.Common.PREF_KEY_ENABLE;
 import static hsm.dataeditgs128.Common.PREF_KEY_GS1REPLACE;
-import static hsm.dataeditgs128.Common.PREF_KEY_PROCESS90ONLY;
+import static hsm.dataeditgs128.Common.PREF_ENABLE_90_ONLY;
 import static hsm.dataeditgs128.Common.PREF_NAME;
 
 public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
         SharedPreferences prefs = this.getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         Boolean isEnabled = prefs.getBoolean(PREF_KEY_ENABLE, true);
         String gs1replace = prefs.getString(PREF_KEY_GS1REPLACE, "#");
-        Boolean process90only=prefs.getBoolean(PREF_KEY_PROCESS90ONLY, true);
+        Boolean process90only=prefs.getBoolean(PREF_ENABLE_90_ONLY, true);
         currentSettings.setText("Current setup:\n"+
                 "Plugin enabled=     "+isEnabled+"\n"+
                 "Replace GS1=        "+gs1replace+"\n"+
