@@ -21,7 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128.Common
 {
 
-
+    volatile static boolean enableGS1_AIM_ID=true;
 
     @Override
     public void onReceive(Context context, Intent intent)
@@ -44,6 +44,31 @@ public class DataEditing  extends BroadcastReceiver implements hsm.dataeditgs128
         String gs1replace = prefs.getString(PREF_KEY_GS1REPLACE, "#");
         Boolean process90only=prefs.getBoolean(PREF_KEY_PROCESS90ONLY, true);
 
+        //test if this is a QR Code to Toggle enabled /off/on
+        if(sAimId.equals("]Q1")){
+            Log.d(Consts.TAG, "got QR Code AimID. Checking, if toggle requested...");
+            if(ScanResult.contains("GS1_128_ON")){
+                Log.d(Consts.TAG, "QR Code says GS1_128_ON. Enabling GS1 AimID prefix.");
+                enableGS1_AIM_ID=true;
+                ScanResult=""; //remove data
+                BeepHelper.beep(100);
+            }else if(ScanResult.contains("GS1_128_OFF")){
+                Log.d(Consts.TAG, "QR Code says GS1_128_OFF. Disabling GS1 AimID prefix.");
+                enableGS1_AIM_ID=false;
+                ScanResult=""; //remove data
+                BeepHelper.beep(100);
+            }else {
+                Log.d(Consts.TAG, "got QR Code AimID. NO toggle requested.");
+            }
+            if(enableGS1_AIM_ID!=isEnabled){
+                Log.d(Consts.TAG, "GS1 AimID prefix enabling changed. Saving new preference");
+                isEnabled=enableGS1_AIM_ID;
+                SharedPreferences.Editor editPrefs = prefs.edit();
+                editPrefs.putBoolean(PREF_KEY_ENABLE, isEnabled);
+                editPrefs.apply();
+                editPrefs=null;
+            }
+        }
         //preset return data
         _data=ScanResult;
 

@@ -22,7 +22,7 @@ import static hsm.dataeditgs128.Common.PREF_KEY_GS1REPLACE;
 import static hsm.dataeditgs128.Common.PREF_KEY_PROCESS90ONLY;
 import static hsm.dataeditgs128.Common.PREF_NAME;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     TextView currentSettings;
 
@@ -78,14 +78,21 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(myIntent);
             }
         });
+        this.getSharedPreferences(PREF_NAME, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
     public void onResume(){
-        super.onResume();
+        super.onResume();    // Set up a listener whenever a key changes
+        this.getSharedPreferences(PREF_NAME, MODE_PRIVATE).registerOnSharedPreferenceChangeListener(this);
         updateSettingsText(this);
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        this.getSharedPreferences(PREF_NAME, MODE_PRIVATE).unregisterOnSharedPreferenceChangeListener(this);
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -106,6 +113,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key){
+        updateSettingsText(this);
     }
 
     void updateSettingsText(Context context){

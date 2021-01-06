@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 
+
 android {
     compileSdkVersion 27
     buildToolsVersion '27.0.3'
@@ -8,8 +9,8 @@ android {
         applicationId "hsm.dataeditgs128"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 5
-        versionName "1.5"
+        versionCode 6
+        versionName "1.6"
     }
     buildTypes {
         release {
@@ -28,4 +29,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:27.0.2'
     compile 'com.android.support:support-v13:27.0.2'
     compile 'com.android.support:preference-v7:27.0.2'
+}
+repositories {
+    mavenCentral()
 }
